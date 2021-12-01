@@ -1,15 +1,20 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   onAuthStateChanged,
   signOut,
 } from "firebase/auth";
+import { collection, getDocs } from "firebase/firestore";
+import { auth } from "./firebase";
+import { db } from "./firebase";
 import "./App.css";
-import { auth } from "./firebase-config";
 import Header from "./Components/Header/Header";
+import New from "./Components/New/New";
+import Menu from "./Components/Menu/Menu";
 
-function App() {
+
+export default function App() {
   const [registerEmail, setRegisterEmail] = useState("");
   const [registerPassword, setRegisterPassword] = useState("");
   const [loginEmail, setLoginEmail] = useState("");
@@ -58,6 +63,29 @@ function App() {
     await signOut(auth);
     setLoggedIn(false);
   };
+
+  //====================================================================
+
+  const [notes, setNotes] = useState([]);
+  const notesCollectionRef = collection(db, "Notes");
+
+  useEffect(() => {
+      const getNotes = async () => {
+      const data = await getDocs(notesCollectionRef);
+      setNotes(data.docs.map((doc) => ({...doc.data(), id: doc.id})))
+  };
+
+  getNotes();
+
+  }, []);
+  console.log(notes);
+
+  let categories = [];
+  notes.forEach(function (note) {
+    categories.push(note.category);
+  })
+  
+  //====================================================================
 
    if (loggedIn != true){
     return (
@@ -108,10 +136,10 @@ function App() {
   } else {
     return (
       <>
-        <Header email={user.email}/>
+        <Header email={user.email} />
+        <Menu />
+        <New />
       </>
     )
   }
 }
-
-export default App;

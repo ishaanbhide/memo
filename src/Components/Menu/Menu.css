@@ -1,0 +1,11 @@
+.menu {
+    background-color: rgb(1, 70, 70);
+    position: relative;
+    display: flex;
+    gap: 25px;
+    width: 100vw;
+    height: 50px;
+    color: white;
+    align-items: center;
+    padding-left: 20px;
+}

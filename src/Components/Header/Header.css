@@ -1,5 +1,6 @@
 .header {
     background-color: rgb(4, 172, 172);
+    position: relative;
     width: 100vw;
     height: 90px;
     display: grid;
