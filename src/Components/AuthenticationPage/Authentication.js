@@ -4,12 +4,8 @@ import "./Authentication.css";
 import {
     createUserWithEmailAndPassword,
     signInWithEmailAndPassword,
-    onAuthStateChanged,
-    signOut,
   } from "firebase/auth";
 import { auth } from "../../firebase";
-import { db } from "../../firebase";
-
 
 export default function Authentication({loggedIn, setLoggedIn}) {
 
@@ -18,6 +14,7 @@ export default function Authentication({loggedIn, setLoggedIn}) {
     const [loginEmail, setLoginEmail] = useState("");
     const [loginPassword, setLoginPassword] = useState("");
     const [loggin, setLoggin] = useState(false);
+    const [registerClicked, setRegisterClicked] = useState(false);
 
     const register = async () => {
         try {
@@ -40,8 +37,8 @@ export default function Authentication({loggedIn, setLoggedIn}) {
             auth,
             loginEmail,
             loginPassword
-            );
-
+            );            
+    
             setLoggedIn(true);
 
         } catch (error) {
@@ -49,43 +46,59 @@ export default function Authentication({loggedIn, setLoggedIn}) {
         }
     };
 
-    return (
-        <div className="authenticaation">
-            <div>
-                <h3> Register User </h3>
-                <input
-                    placeholder="Email..."
-                    onChange={(event) => {
-                    setRegisterEmail(event.target.value);
-                    }}
-                />
-                <input
-                    placeholder="Password..."
-                    onChange={(event) => {
-                    setRegisterPassword(event.target.value);
-                    }}
-                />
-                <button onClick={register}> Create User</button>
-                {loggedIn && (<Navigate to="/home" />)}
-            </div>
+    const registerIsClicked = e => {
+        setRegisterClicked(!registerClicked);
+    }
 
-            <div>
-                <h3> Login </h3>
+    return (
+        <div className="authentication">
+
+            <div className="login">
+                <h3>Login</h3>
                 <input
-                    placeholder="Email..."
+                    className="auth-input"
+                    placeholder="Email"
                     onChange={(event) => {
                     setLoginEmail(event.target.value);
                     }}
                 />
                 <input
-                    placeholder="Password..."
+                    className="auth-input"
+                    placeholder="Password"
+                    type="password"
                     onChange={(event) => {
                     setLoginPassword(event.target.value);
                     }}
                 />
-                <button onClick={login}> Login</button>
-                {loggedIn && (<Navigate to="/home" />)}
+                <div className="login-or-register">
+                    <button className="auth-button" onClick={login}> Login</button>
+                    {loggedIn && (<Navigate to="/home" />)}
+                    <p>or <a href="javascript:void(0)" onClick={registerIsClicked}>Register</a></p>
+                </div>
             </div>
+            
+            {registerClicked && (
+                <div className="register">
+                    <h3>Register</h3>
+                    <input
+                        className="auth-input"
+                        placeholder="Email"
+                        onChange={(event) => {
+                        setRegisterEmail(event.target.value);
+                        }}
+                    />
+                    <input
+                        className="auth-input"
+                        placeholder="Password"
+                        type="password"
+                        onChange={(event) => {
+                        setRegisterPassword(event.target.value);
+                        }}
+                    />
+                    <button className="reg-button" onClick={register}>Register</button>
+                    {loggedIn && (<Navigate to="/home" />)}
+            </div>
+            )}
         </div>
     )
 }

@@ -1,0 +1,35 @@
+.authentication {
+    padding-left: 20px;
+}
+
+.login {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.login-or-register {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+}
+
+.register {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.auth-button {
+    width: 75px;
+}
+
+.reg-button {
+    width: 75px;
+    margin-top: 8px;
+}
+
+.auth-input {
+    width: 150px;
+    height: 20px;
+}

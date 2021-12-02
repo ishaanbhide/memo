@@ -20,7 +20,7 @@ export default function Header({loggedIn, setLoggedIn, user}) {
             
             <div className="header-right">
                 <p>Logged in as {user.email}</p>
-                <a href="/"><button onClick={logout}>Log Out</button></a>
+                <a href="/"><button className="logout-button" onClick={logout}>Log Out</button></a>
             </div>
         </div>
     )
