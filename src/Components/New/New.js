@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "./New.css";
 import { db } from "../../firebase";
 import { collection, addDoc } from "firebase/firestore";
@@ -7,10 +7,19 @@ export default function New({user}) {
 
     const createNote = async () => {
         try {
+
+            const noteTitle = document.getElementById("newTitle").value;
+            const noteCategory = document.getElementById("newCategory").value;
+            const noteMessage = document.getElementById("newMessage").value;
+
+            document.getElementById("newTitle").value = "";
+            document.getElementById("newCategory").value = "";
+            document.getElementById("newMessage").value = "";
+
             await addDoc(collection(db, user.uid), {
-                title: document.getElementById("newTitle").value,
-                category: document.getElementById("newCategory").value,
-                message: document.getElementById("newMessage").value
+                title: noteTitle,
+                category: noteCategory,
+                message: noteMessage
              });
 
         } catch (error) {
@@ -20,11 +29,13 @@ export default function New({user}) {
 
     return (
         <div className="new-note">
-            <h4>New Note</h4>
-            <input id="newTitle" type="text" placeholder="Title" name="title"/>
-            <input id="newCategory" type="text" placeholder="Category" name="category"/>
-            <textarea id="newMessage" name="message"></textarea>
-            <button onClick={createNote} type="submit">Send</button>
+            <div className="note-box">
+                <p className="note-p">Create New Note</p>
+                <input id="newTitle" type="text" placeholder="Title" name="title"/>
+                <input id="newCategory" type="text" placeholder="Category" name="category"/>
+                <textarea id="newMessage" name="message"></textarea>
+                <button className="note-button" onClick={createNote} type="submit">Create</button>
+            </div>
         </div>
     )
 }

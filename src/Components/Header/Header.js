@@ -2,13 +2,12 @@ import React from "react";
 import "./Header.css";
 import { auth } from "../../firebase";
 import { signOut } from "firebase/auth";
-import { Link } from "react-router-dom";
 
 export default function Header({loggedIn, setLoggedIn, user}) {
 
     const logout = async () => {
         await signOut(auth);
-        setLoggedIn(false);
+        //setLoggedIn(false);
       };
 
 

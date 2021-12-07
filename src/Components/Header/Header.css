@@ -1,23 +1,38 @@
 .header {
-    background-color: rgb(4, 172, 172);
-    position: relative;
+    background-color: rgb(247, 175, 181);
     width: 100vw;
     height: 90px;
-    display: grid;
-    grid-template-columns: 50% 50%;
     align-items: center;
+    justify-content: center;
 }
 
 .header-left {
-    padding-left: 20px;
+    float: left;
+    padding-left: 30px;
+    padding-top: 5px;
 }
 
 .header-right {
+    float: right;
     display: flex;
     align-items: center;
-    gap: 12px;
+    justify-content: center;
+    gap: 20px;
+    padding-right: 30px;
+    padding-top: 20px;
 }
 
 .logout-button {
     width: 80px;
+    height: 35px;
+    background-color: rgb(255, 255, 255);
+    border: none;
+    display: inline-block;
+    padding: 5px 15px;
+    text-align: center;
+}
+
+.logout-button:hover {
+    background-color: rgb(230, 230, 230);
+    transition: 0.2s ease;
 }

@@ -1,11 +1,35 @@
 .menu {
-    background-color: rgb(1, 70, 70);
-    position: relative;
-    display: flex;
-    gap: 25px;
-    width: 100vw;
-    height: 50px;
-    color: white;
-    align-items: center;
-    padding-left: 20px;
+  background-color: rgb(92, 0, 31);
+  width: 100vw;
+  height: 50px;
+  display: table-cell;
+  vertical-align: middle;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:link {
+    color: rgb(255, 255, 255);
+  }
+  
+a:visited {
+  color: rgb(255, 255, 255);
+}
+  
+a:hover {
+  color: rgb(247, 175, 181);
+  transition: 0.2s ease;
+}
+  
+a:active {
+  color: rgb(255, 255, 255);
+}
+
+.menu-items {
+  display: flex;
+  gap: 25px;
+  color: white;
+  padding-left: 30px;
 }

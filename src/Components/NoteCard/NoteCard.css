@@ -1,0 +1,23 @@
+.note-card {
+    background-color: rgb(226, 250, 230);
+    width: 200px;
+    height: auto;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 10px 10px #e2e2e2;
+    display: inline-block;
+}
+
+.note-category {
+    color: grey;
+    text-transform: uppercase;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.note-title {
+    color: black;
+    text-transform: capitalize;
+    font-size: 16px;
+    font-weight: 700;
+}

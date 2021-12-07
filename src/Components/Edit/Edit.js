@@ -1,17 +1,22 @@
-import "./Home.css";
+import "./Edit.css";
 import { Navigate } from "react-router-dom";
 import Header from "../../Components/Header/Header";
-import New from "../../Components/New/New";
 import Menu from "../../Components/Menu/Menu";
+import EditCard from "../EditCard/EditCard";
+import { useEffect } from "react";
 
-export default function Home({loggedIn, setLoggedIn, user}) {
+export default function Edit({loggedIn, setLoggedIn, user, noteEdit, setNoteEdit}) {
+
+    useEffect(()=>{
+        console.log({noteEdit});
+    })
     
     return (
         <div className="home">
             {!loggedIn && (<Navigate to="/" />)}
             <Header loggedIn={loggedIn} setLoggedIn={setLoggedIn} user={user}/>
             <Menu />
-            <New user={user}/>
+            <EditCard noteEdit={noteEdit} />
         </div>
     )
 }
