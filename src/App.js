@@ -19,6 +19,8 @@ export default function App() {
     const [loggedIn, setLoggedIn] = useState(false);
     let [notes, setNotes] = useState([""]);
     const [noteEdit, setNoteEdit] = useState([]);
+    const [loading, setLoading] = useState(false);
+    const [updateNote, setUpdateNote] = useState([]);
 
     useEffect(()=>{
 
@@ -34,11 +36,10 @@ export default function App() {
         }
 
         const getNotes = async (user) => {
-
           try {
             const data = await getDocs(collection(db, user.uid));
             setNotes(data.docs.map((doc) => ({...doc.data(), id: doc.id})));   
-    
+            setLoading(true);
           } catch(error) {
               console.log(error.message);
           }
@@ -63,7 +64,7 @@ export default function App() {
 
           <Route path="/notes"
           exact
-          element={<Notes loggedIn={loggedIn} setLoggedIn={setLoggedIn} user={user} notes={notes} noteEdit={noteEdit} setNoteEdit={setNoteEdit} />}
+          element={<Notes loggedIn={loggedIn} setLoggedIn={setLoggedIn} user={user} notes={notes} noteEdit={noteEdit} setNoteEdit={setNoteEdit} loading={loading}/>}
           />
 
           <Route path="/edit"
