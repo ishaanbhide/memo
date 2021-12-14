@@ -19,7 +19,8 @@ export default function New({user}) {
             await addDoc(collection(db, user.uid), {
                 title: noteTitle,
                 category: noteCategory,
-                message: noteMessage
+                message: noteMessage,
+                date: new Date()
              });
 
         } catch (error) {

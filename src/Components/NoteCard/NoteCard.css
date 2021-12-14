@@ -24,4 +24,17 @@
 
 .note-buttons {
     display: flex;
+    gap: 15px;
+}
+
+.note-card-button {
+    border-radius: 10px;
+    background-color: rgb(171, 226, 178);
+    border: none;
+    padding: 7px;
+}
+
+.note-card-button:hover {
+    background-color: rgb(90, 207, 90);
+    transition: 0.2s ease;
 }

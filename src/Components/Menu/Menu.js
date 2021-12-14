@@ -7,8 +7,8 @@ export default function Menu() {
     return (
         <div className="menu">
             <div className="menu-items">
-                <Link to="/home">Home</Link>
-                <a href="/notes">Notes</a>
+                <Link to="/home">New</Link>
+                <Link to="/notes">Notes</Link>
             </div>
         </div>
     )

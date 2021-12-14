@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Navigate } from "react-router";
 import "./EditCard.css";
 import { db } from "../../firebase";
 import { doc, updateDoc } from "firebase/firestore";
@@ -12,17 +13,15 @@ export default function EditCard({noteEdit, setNoteEdit, user}) {
         document.getElementById("newCategory").defaultValue = noteEdit.category;
         document.getElementById("newMessage").defaultValue = noteEdit.message;
 
-        if (noteEdit.length != 0) {
+        if (noteEdit.length !== 0) {
             setDoneEdit(false);
         }
 
-        console.log(noteEdit);
-
     }, [noteEdit])
+
 
     const editNote = async () => {
         try {
-
             const noteTitle = document.getElementById("newTitle").value;
             const noteCategory = document.getElementById("newCategory").value;
             const noteMessage = document.getElementById("newMessage").value;
@@ -45,7 +44,7 @@ export default function EditCard({noteEdit, setNoteEdit, user}) {
 
     return (
         <div className="new-note">
-            {doneEdit && (<meta http-equiv="refresh" content="0; /notes" />)}
+            {doneEdit && (<Navigate to="/notes" />)}
             <div className="note-box">
                 <p className="note-p">Edit Note</p>
                 <input id="newTitle" type="text" placeholder="Title" name="title" />

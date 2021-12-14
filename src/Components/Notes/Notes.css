@@ -1,3 +1,19 @@
+.categories {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+}
+
+.category-p {
+    color: rgb(92, 0, 31);
+}
+
+.category-p:hover {
+    cursor: pointer;
+    font-weight: bold;
+}
+
 .notes-grid {
     padding-top: 30px;
     justify-content: center;
