@@ -12,7 +12,7 @@ export default function Notes({loggedIn, setLoggedIn, user, notes, setNotes, not
 
     // States
 
-    const [loading, setLoading] = useState(false);
+    const [loadingNotes, setLoadingNotes] = useState(false);
     const [allCategories, setAllCategories] = useState([]);
     const [filteredNotes, setFilteredNotes] = useState();
 
@@ -23,7 +23,7 @@ export default function Notes({loggedIn, setLoggedIn, user, notes, setNotes, not
             const newNotes = data.docs.map((doc) => ({...doc.data(), id: doc.id}))
             setNotes(newNotes);
             setFilteredNotes(newNotes);
-            setLoading(true);
+            setLoadingNotes(true);
             return newNotes;
 
         } catch(error) {
@@ -74,7 +74,7 @@ export default function Notes({loggedIn, setLoggedIn, user, notes, setNotes, not
                 })}
             </div>
             
-            {loading ? (
+            {loadingNotes ? (
                 <div className="notes-grid">
                 {filteredNotes.map((note) => {
                     return (

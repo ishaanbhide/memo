@@ -3,7 +3,7 @@ import "./New.css";
 import { db } from "../../firebase";
 import { collection, addDoc } from "firebase/firestore";
 
-export default function New({user}) {
+export default function New({user, dropCategories}) {
 
     const createNote = async () => {
         try {
@@ -33,7 +33,15 @@ export default function New({user}) {
             <div className="note-box">
                 <p className="note-p">Create New Note</p>
                 <input id="newTitle" type="text" placeholder="Title" name="title"/>
-                <input id="newCategory" type="text" placeholder="Category" name="category"/>
+                <input id="newCategory" type="text" placeholder="Category" name="category" list="category"/>
+
+                <datalist id="category" name="category">
+                    {dropCategories.map(category => {
+                        return (
+                            <option value={category}>{category}</option>
+                        )
+                    })}
+                </datalist>
                 <textarea id="newMessage" name="message"></textarea>
                 <button className="note-button" onClick={createNote} type="submit">Create</button>
             </div>
