@@ -6,12 +6,13 @@
 }
 
 .category-p {
-    color: rgb(92, 0, 31);
+    color: #2a4d69;
+    font-weight: 600;
 }
 
 .category-p:hover {
     cursor: pointer;
-    font-weight: bold;
+    color: #63ace5;
 }
 
 .notes-grid {

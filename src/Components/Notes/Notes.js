@@ -50,11 +50,11 @@ export default function Notes({loggedIn, setLoggedIn, user, notes, setNotes, not
 
       const filterNotes = (category) => {
 
-        if (category.category === "All") {
+        if (category === "All") {
             setFilteredNotes(notes);
         } else {
             const fNotes = notes.filter(function(note) {
-                return (note.category === category.category);
+                return (note.category === category);
             });
     
             setFilteredNotes(fNotes);
@@ -69,7 +69,7 @@ export default function Notes({loggedIn, setLoggedIn, user, notes, setNotes, not
             <div className="categories">
                 {allCategories.map(category => {
                     return (
-                        <p className="category-p" onClick={() => filterNotes({category})}>{category}</p>
+                        <p className="category-p" onClick={() => filterNotes(category)}>{category}</p>
                     )
                 })}
             </div>

@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./Header.css";
 import { auth } from "../../firebase";
 import { signOut } from "firebase/auth";
@@ -7,14 +8,14 @@ export default function Header({loggedIn, setLoggedIn, user}) {
 
     const logout = async () => {
         await signOut(auth);
-        //setLoggedIn(false);
+        setLoggedIn(false);
       };
 
 
     return (
         <div className="header">
             <div className="header-left">
-                <h1>My Notes</h1>
+                <Link to="/"><h1>memo.</h1></Link>
             </div>
             
             <div className="header-right">

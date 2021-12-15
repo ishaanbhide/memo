@@ -9,13 +9,13 @@
   flex-direction: column;
   gap: 20px;
   align-items: center;
-  background-color: rgb(226, 250, 230);
+  background-color: rgb(212, 238, 216);
   padding: 30px;
   width: 300px;
   height: 300px;
   border-radius: 20px;
   justify-content: center;
-  box-shadow: 10px 10px #e2e2e2;
+  box-shadow: 10px 10px #adcbe3;
 }
 
 .note-p {

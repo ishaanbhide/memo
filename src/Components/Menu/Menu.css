@@ -1,5 +1,5 @@
 .menu {
-  background-color: rgb(92, 0, 31);
+  background-color: #2a4d69;
   width: 100vw;
   height: 50px;
   display: table-cell;
@@ -11,25 +11,25 @@ a {
 }
 
 a:link {
-    color: rgb(255, 255, 255);
+    color: #f1f6fa;
   }
   
 a:visited {
-  color: rgb(255, 255, 255);
+  color: #f1f6fa;
 }
   
 a:hover {
-  color: rgb(247, 175, 181);
+  color: #63ace5;
   transition: 0.2s ease;
 }
   
 a:active {
-  color: rgb(255, 255, 255);
+  color: #f1f6fa;
 }
 
 .menu-items {
   display: flex;
   gap: 25px;
-  color: white;
+  color: #f1f6fa;
   padding-left: 30px;
 }

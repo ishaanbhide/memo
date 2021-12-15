@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Navigate } from "react-router";
 import "./EditCard.css";
 import { db } from "../../firebase";
-import { doc, updateDoc } from "firebase/firestore";
+import { doc, updateDoc, deleteDoc } from "firebase/firestore";
 
 export default function EditCard({noteEdit, setNoteEdit, user}) {
 
@@ -42,15 +42,26 @@ export default function EditCard({noteEdit, setNoteEdit, user}) {
     }
 
 
+    const deleteNote = async () => {
+        try {
+            await deleteDoc(doc(db, user.uid, noteEdit.id));
+            setDoneEdit(true);
+        } catch (error) {
+            console.log(error.message);
+        }
+    }
+
+
     return (
         <div className="new-note">
             {doneEdit && (<Navigate to="/notes" />)}
-            <div className="note-box">
+            <div className="note-box-edit">
                 <p className="note-p">Edit Note</p>
                 <input id="newTitle" type="text" placeholder="Title" name="title" />
                 <input id="newCategory" type="text" placeholder="Category" name="category"/>
                 <textarea id="newMessage" name="message"></textarea>
-                <button className="note-button" type="submit" onClick={editNote}>Update</button>
+                <button className="note-button-edit" type="submit" onClick={editNote}>Update</button>
+                <button className="note-button-delete" type="submit" onClick={deleteNote}>Delete</button>
             </div> 
         </div>
     )

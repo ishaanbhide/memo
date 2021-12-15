@@ -3,7 +3,7 @@ import "./New.css";
 import { db } from "../../firebase";
 import { collection, addDoc } from "firebase/firestore";
 
-export default function New({user, dropCategories}) {
+export default function New({user, dropCategories, setDropCategories}) {
 
     const createNote = async () => {
         try {
@@ -11,6 +11,8 @@ export default function New({user, dropCategories}) {
             const noteTitle = document.getElementById("newTitle").value;
             const noteCategory = document.getElementById("newCategory").value;
             const noteMessage = document.getElementById("newMessage").value;
+
+            setDropCategories([...dropCategories, noteCategory]);
 
             document.getElementById("newTitle").value = "";
             document.getElementById("newCategory").value = "";

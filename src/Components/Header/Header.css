@@ -1,5 +1,5 @@
 .header {
-    background-color: rgb(247, 175, 181);
+    background-color: #adcbe3;
     width: 100vw;
     height: 90px;
     align-items: center;
@@ -10,6 +10,15 @@
     float: left;
     padding-left: 30px;
     padding-top: 5px;
+}
+
+h1 {
+    font-family: 'DM Sans', sans-serif;
+    color: #2a4d69;
+}
+
+h1:hover {
+    cursor: pointer;
 }
 
 .header-right {
@@ -25,7 +34,7 @@
 .logout-button {
     width: 80px;
     height: 35px;
-    background-color: rgb(255, 255, 255);
+    background-color: #f1f6fa;
     border: none;
     display: inline-block;
     padding: 5px 15px;
@@ -33,6 +42,6 @@
 }
 
 .logout-button:hover {
-    background-color: rgb(230, 230, 230);
+    background-color: #63ace5;
     transition: 0.2s ease;
 }

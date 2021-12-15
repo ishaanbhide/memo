@@ -18,8 +18,6 @@ export default function App() {
   const [user, setUser] = useState({});
   const [loggedIn, setLoggedIn] = useState(false);
   const [notes, setNotes] = useState([]);
-  const [noteEdit, setNoteEdit] = useState([]);
-  
 
 
   // Detecting logged in user
@@ -39,41 +37,40 @@ export default function App() {
 
 
   return (
-    <Router>
-      <Routes>
+    <div className="app">
+      <Router>
+        <Routes>
 
-        <Route path="/home"
-        exact
-        element={<Home loggedIn={loggedIn} 
-        setLoggedIn={setLoggedIn} 
-        user={user} />} 
-        />
+          <Route path="/home"
+          exact
+          element={<Home loggedIn={loggedIn} 
+          setLoggedIn={setLoggedIn} 
+          user={user} />} 
+          />
 
-        <Route path="/notes"
-        exact
-        element={<Notes loggedIn={loggedIn} 
-        setLoggedIn={setLoggedIn} user={user} 
-        notes={notes}
-        setNotes={setNotes}
-        noteEdit={noteEdit} 
-        setNoteEdit={setNoteEdit} />}
-        />
+          <Route path="/notes"
+          exact
+          element={<Notes loggedIn={loggedIn} 
+          setLoggedIn={setLoggedIn} user={user} 
+          notes={notes}
+          setNotes={setNotes} />}
+          />
 
-        <Route path="/edit"
-        exact
-        element={<Edit loggedIn={loggedIn} 
-        setLoggedIn={setLoggedIn} 
-        user={user} 
-        noteEdit={noteEdit} />}
-        />
+          <Route path="/edit/:id"
+          exact
+          element={<Edit loggedIn={loggedIn} 
+          setLoggedIn={setLoggedIn} 
+          user={user} />}
+          />
 
-        <Route path="/"
-        exact
-        element={<Authentication loggedIn={loggedIn} 
-        setLoggedIn={setLoggedIn} />}
-        />
-        
-      </Routes>
-    </Router>
+          <Route path="/"
+          exact
+          element={<Authentication loggedIn={loggedIn} 
+          setLoggedIn={setLoggedIn} />}
+          />
+          
+        </Routes>
+      </Router>
+    </div>
   )
 }

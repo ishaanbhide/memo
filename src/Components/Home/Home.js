@@ -12,7 +12,7 @@ import Loader from "../Loader/Loader";
 export default function Home({loggedIn, setLoggedIn, user}) {
 
     const [loadingHome, setLoadingHome] = useState(false);
-    const [dropCategories, setDropCategories] = useState(["lol"]);
+    const [dropCategories, setDropCategories] = useState([""]);
 
     const getNotes = async (user) => {
         try {
@@ -50,7 +50,7 @@ export default function Home({loggedIn, setLoggedIn, user}) {
                 <Header loggedIn={loggedIn} setLoggedIn={setLoggedIn} user={user} />
                 <Menu />
                 {loadingHome ? (
-                <New user={user} dropCategories={dropCategories} />
+                <New user={user} dropCategories={dropCategories} setDropCategories={setDropCategories} />
             ) : <Loader />}
         </div>
     )
