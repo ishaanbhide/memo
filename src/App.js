@@ -18,6 +18,7 @@ export default function App() {
   const [user, setUser] = useState({});
   const [loggedIn, setLoggedIn] = useState(false);
   const [notes, setNotes] = useState([]);
+  const [noteToEdit, setNoteToEdit] = useState([]);
 
 
   // Detecting logged in user
@@ -53,14 +54,17 @@ export default function App() {
           element={<Notes loggedIn={loggedIn} 
           setLoggedIn={setLoggedIn} user={user} 
           notes={notes}
-          setNotes={setNotes} />}
+          setNotes={setNotes}
+          setNoteToEdit={setNoteToEdit} />}
           />
 
           <Route path="/edit/:id"
           exact
           element={<Edit loggedIn={loggedIn} 
           setLoggedIn={setLoggedIn} 
-          user={user} />}
+          user={user}
+          noteToEdit={noteToEdit}
+          setNoteToEdit={setNoteToEdit} />}
           />
 
           <Route path="/"

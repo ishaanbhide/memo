@@ -4,20 +4,20 @@ import "./EditCard.css";
 import { db } from "../../firebase";
 import { doc, updateDoc, deleteDoc } from "firebase/firestore";
 
-export default function EditCard({noteEdit, setNoteEdit, user}) {
+export default function EditCard({noteToEdit, setNoteToEdit, user}) {
 
     const [doneEdit, setDoneEdit] = useState(false);
 
     useEffect(()=>{
-        document.getElementById("newTitle").defaultValue = noteEdit.title;
-        document.getElementById("newCategory").defaultValue = noteEdit.category;
-        document.getElementById("newMessage").defaultValue = noteEdit.message;
+        document.getElementById("newTitle").defaultValue = noteToEdit.title;
+        document.getElementById("newCategory").defaultValue = noteToEdit.category;
+        document.getElementById("newMessage").defaultValue = noteToEdit.message;
 
-        if (noteEdit.length !== 0) {
+        if (noteToEdit.length !== 0) {
             setDoneEdit(false);
         }
 
-    }, [noteEdit])
+    }, [noteToEdit])
 
 
     const editNote = async () => {
@@ -26,14 +26,14 @@ export default function EditCard({noteEdit, setNoteEdit, user}) {
             const noteCategory = document.getElementById("newCategory").value;
             const noteMessage = document.getElementById("newMessage").value;
 
-            await updateDoc(doc(db, user.uid, noteEdit.id), {
+            await updateDoc(doc(db, user.uid, noteToEdit.id), {
                 title: noteTitle,
                 category: noteCategory,
                 message: noteMessage
              });
 
              setDoneEdit(true);
-             setNoteEdit([]);
+             setNoteToEdit([]);
              
 
         } catch (error) {
@@ -44,7 +44,7 @@ export default function EditCard({noteEdit, setNoteEdit, user}) {
 
     const deleteNote = async () => {
         try {
-            await deleteDoc(doc(db, user.uid, noteEdit.id));
+            await deleteDoc(doc(db, user.uid, noteToEdit.id));
             setDoneEdit(true);
         } catch (error) {
             console.log(error.message);

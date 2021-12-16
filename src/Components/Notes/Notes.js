@@ -8,7 +8,7 @@ import { getDocs } from "@firebase/firestore";
 import { collection, query, orderBy } from "firebase/firestore";
 import { db } from "../../firebase";
 
-export default function Notes({loggedIn, setLoggedIn, user, notes, setNotes, noteEdit, setNoteEdit}) {
+export default function Notes({loggedIn, setLoggedIn, user, notes, setNotes, noteEdit, setNoteEdit, setNoteToEdit}) {
 
     // States
 
@@ -78,7 +78,7 @@ export default function Notes({loggedIn, setLoggedIn, user, notes, setNotes, not
                 <div className="notes-grid">
                 {filteredNotes.map((note) => {
                     return (
-                        <NoteCard noteID={note.id} noteTitle={note.title} noteCategory={note.category} noteMessage={note.message} noteEdit={noteEdit} setNoteEdit={setNoteEdit} user={user} />
+                        <NoteCard noteID={note.id} noteTitle={note.title} noteCategory={note.category} noteMessage={note.message} setNoteToEdit={setNoteToEdit} user={user} />
                     )})}
                 </div>
             ) : <Loader />}

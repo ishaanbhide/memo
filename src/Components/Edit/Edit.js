@@ -9,7 +9,7 @@ import { db } from "../../firebase";
 import { doc, getDoc } from "firebase/firestore";
 
 
-export default function Edit({loggedIn, setLoggedIn, user}) {
+export default function Edit({loggedIn, setLoggedIn, user, noteToEdit, setNoteToEdit}) {
 
     const [loadingEdit, setLoadingEdit] = useState(false);
     const [noteEdit, setNoteEdit] = useState([]);
@@ -31,12 +31,17 @@ export default function Edit({loggedIn, setLoggedIn, user}) {
     useEffect(async() => {
 
         if (loggedIn === true) {
-          const noteTemp1 = await getNoteToEdit(user);
-          const noteTemp2 = noteTemp1.data();
-          noteTemp2.id = params.id;
-          setNoteEdit(noteTemp2);
+            if (noteToEdit.length === 0) {
+                const noteTemp1 = await getNoteToEdit(user);
+                const noteTemp2 = noteTemp1.data();
+                noteTemp2.id = params.id;
+                setNoteToEdit(noteTemp2);
+            } else {
+                setLoadingEdit(true);
+            }
+            
         }
-  
+
       }, [loggedIn]);
 
 
@@ -46,7 +51,7 @@ export default function Edit({loggedIn, setLoggedIn, user}) {
             <Header loggedIn={loggedIn} setLoggedIn={setLoggedIn} user={user} />
             <Menu />
             {loadingEdit ? (
-                <EditCard noteEdit={noteEdit} setNoteEdit={setNoteEdit} user={user} />
+                <EditCard noteToEdit={noteToEdit} setNoteToEdit={setNoteToEdit} user={user} />
             ) : <Loader />}
         </div>
     )
