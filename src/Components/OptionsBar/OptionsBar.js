@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import "./OptionsBar.css";
 import { db } from "../../firebase";
 import { doc, deleteDoc } from "firebase/firestore";
 
-export default function OptionsBar({selectedNotes, setDoneSelection, user}) {
+export default function OptionsBar({selectedNotes, setReloadNotes, user}) {
 
     const bulkDelete = async () => {
         
@@ -14,19 +14,16 @@ export default function OptionsBar({selectedNotes, setDoneSelection, user}) {
 
             selectedNotes.forEach(function (item, index) {
                 deleteDoc(doc(db, user.uid, item));
-              });
-
-            setDoneSelection(true);
+              }); 
+              
+            setReloadNotes(true);
             
         } catch (error) {
             console.log(error.message);
         }
-
-        
-        console.log("deleting is done");
         
     }
-//{doneSelection && (<Navigate to="/notes" />)}
+
     return (
         <div className={"options-bar"}>
             <div className="option-items">

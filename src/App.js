@@ -49,7 +49,7 @@ export default function App() {
           user={user} />} 
           />
 
-          <Route path="/notes"
+          <Route path="/notes/"
           exact
           element={<Notes loggedIn={loggedIn} 
           setLoggedIn={setLoggedIn} user={user} 

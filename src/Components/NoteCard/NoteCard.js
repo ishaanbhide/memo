@@ -4,6 +4,7 @@ import "./NoteCard.css";
 
 export default function NoteCard({noteID, noteTitle, noteCategory, noteMessage, setNoteToEdit, selectedNotes, setSelectedNotes, setOptionsBar}) {
 
+
     const editNote = () => {
 
         const noteToEditTemp = {

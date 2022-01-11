@@ -12,7 +12,6 @@ import { doc, getDoc } from "firebase/firestore";
 export default function Edit({loggedIn, setLoggedIn, user, noteToEdit, setNoteToEdit}) {
 
     const [loadingEdit, setLoadingEdit] = useState(false);
-    const [noteEdit, setNoteEdit] = useState([]);
     const params = useParams();
   
 

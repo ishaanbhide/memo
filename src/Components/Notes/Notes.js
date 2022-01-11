@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { Navigate } from "react-router";
 import "./Notes.css";
 import Header from "../Header/Header";
 import Menu from "../Menu/Menu";
@@ -19,7 +18,8 @@ export default function Notes({loggedIn, setLoggedIn, user, notes, setNotes, set
     const [filteredNotes, setFilteredNotes] = useState();
     const [selectedNotes, setSelectedNotes] = useState([]);
     const [optionsBar, setOptionsBar] = useState(false);
-    const [doneSelection, setDoneSelection] = useState(false);
+    const [reloadNotes, setReloadNotes] = useState(false);
+
 
     const getNotes = async (user) => {
         try {
@@ -52,6 +52,23 @@ export default function Notes({loggedIn, setLoggedIn, user, notes, setNotes, set
       }, [loggedIn]);
 
 
+      useEffect(async() => {
+          if (reloadNotes === true) {
+              setLoadingNotes(false);
+              if (loggedIn === true) {
+                const updatedNotes = await getNotes(user);
+                console.log(updatedNotes);
+      
+                let categoriesTemp = ["All"];
+                (updatedNotes.map((note) => categoriesTemp.push(note.category)));
+                let categoriesSet = [...new Set(categoriesTemp)];
+                setAllCategories(categoriesSet);
+              }
+              setReloadNotes(false);
+          }
+      }, [reloadNotes]);
+
+
       const filterNotes = (category) => {
 
         if (category === "All") {
@@ -71,35 +88,36 @@ export default function Notes({loggedIn, setLoggedIn, user, notes, setNotes, set
             <Header loggedIn={loggedIn} setLoggedIn={setLoggedIn} user={user} />
             <Menu />
 
-            {doneSelection && (<Navigate to="/home" />)}
-
-            <div className="categories">
-                {allCategories.map(category => {
-                    return (
-                        <p className="category-p" onClick={() => filterNotes(category)}>{category}</p>
-                    )
-                })}
-            </div>
             
             {loadingNotes ? (
-                <div className="notes-grid">
-                {filteredNotes.map((note) => {
-                    return (
-                        <NoteCard noteID={note.id} 
-                        noteTitle={note.title} 
-                        noteCategory={note.category} 
-                        noteMessage={note.message} 
-                        setNoteToEdit={setNoteToEdit}
-                        selectedNotes={selectedNotes}
-                        setSelectedNotes={setSelectedNotes}
-                        setOptionsBar={setOptionsBar} />
-                    )})}
-                </div>
+                <>
+                    <div className="categories">
+                        {allCategories.map(category => {
+                            return (
+                                <p className="category-p" onClick={() => filterNotes(category)}>{category}</p>
+                            )
+                        })}
+                    </div>
+
+                    <div className="notes-grid">
+                    {filteredNotes.map((note) => {
+                        return (
+                            <NoteCard noteID={note.id} 
+                            noteTitle={note.title} 
+                            noteCategory={note.category} 
+                            noteMessage={note.message} 
+                            setNoteToEdit={setNoteToEdit}
+                            selectedNotes={selectedNotes}
+                            setSelectedNotes={setSelectedNotes}
+                            setOptionsBar={setOptionsBar} />
+                        )})}
+                    </div>
+                </>
             ) : <Loader />}
 
             {optionsBar && (
                 <OptionsBar selectedNotes={selectedNotes} 
-                setDoneSelection={setDoneSelection}
+                setReloadNotes={setReloadNotes}
                 user={user} />
             )}
         </div>
