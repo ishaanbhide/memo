@@ -70,8 +70,13 @@
     font-size: 1em;
     transition: padding 0.3s 0.2s ease;
     border-width: 0 0 2px;
-    border-color: rgb(90, 90, 90);
+    border-color: rgb(53, 53, 53);
 }
+
+::placeholder {
+    color: rgb(53, 53, 53);
+    opacity: 50%;
+  }
 
 .auth-input:focus {
     border-color: green

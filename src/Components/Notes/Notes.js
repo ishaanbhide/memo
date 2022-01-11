@@ -1,20 +1,25 @@
 import React, { useEffect, useState } from "react";
+import { Navigate } from "react-router";
 import "./Notes.css";
 import Header from "../Header/Header";
 import Menu from "../Menu/Menu";
 import NoteCard from "../NoteCard/NoteCard";
 import Loader from "../Loader/Loader";
+import OptionsBar from "../OptionsBar/OptionsBar";
 import { getDocs } from "@firebase/firestore";
 import { collection, query, orderBy } from "firebase/firestore";
 import { db } from "../../firebase";
 
-export default function Notes({loggedIn, setLoggedIn, user, notes, setNotes, noteEdit, setNoteEdit, setNoteToEdit}) {
+export default function Notes({loggedIn, setLoggedIn, user, notes, setNotes, setNoteToEdit}) {
 
     // States
 
     const [loadingNotes, setLoadingNotes] = useState(false);
     const [allCategories, setAllCategories] = useState([]);
     const [filteredNotes, setFilteredNotes] = useState();
+    const [selectedNotes, setSelectedNotes] = useState([]);
+    const [optionsBar, setOptionsBar] = useState(false);
+    const [doneSelection, setDoneSelection] = useState(false);
 
     const getNotes = async (user) => {
         try {
@@ -30,7 +35,6 @@ export default function Notes({loggedIn, setLoggedIn, user, notes, setNotes, not
             console.log(error.message);
         }
     }
-
 
 
     useEffect(async() => {
@@ -52,6 +56,7 @@ export default function Notes({loggedIn, setLoggedIn, user, notes, setNotes, not
 
         if (category === "All") {
             setFilteredNotes(notes);
+            console.log(filteredNotes);
         } else {
             const fNotes = notes.filter(function(note) {
                 return (note.category === category);
@@ -66,6 +71,8 @@ export default function Notes({loggedIn, setLoggedIn, user, notes, setNotes, not
             <Header loggedIn={loggedIn} setLoggedIn={setLoggedIn} user={user} />
             <Menu />
 
+            {doneSelection && (<Navigate to="/home" />)}
+
             <div className="categories">
                 {allCategories.map(category => {
                     return (
@@ -78,10 +85,23 @@ export default function Notes({loggedIn, setLoggedIn, user, notes, setNotes, not
                 <div className="notes-grid">
                 {filteredNotes.map((note) => {
                     return (
-                        <NoteCard noteID={note.id} noteTitle={note.title} noteCategory={note.category} noteMessage={note.message} setNoteToEdit={setNoteToEdit} user={user} />
+                        <NoteCard noteID={note.id} 
+                        noteTitle={note.title} 
+                        noteCategory={note.category} 
+                        noteMessage={note.message} 
+                        setNoteToEdit={setNoteToEdit}
+                        selectedNotes={selectedNotes}
+                        setSelectedNotes={setSelectedNotes}
+                        setOptionsBar={setOptionsBar} />
                     )})}
                 </div>
             ) : <Loader />}
+
+            {optionsBar && (
+                <OptionsBar selectedNotes={selectedNotes} 
+                setDoneSelection={setDoneSelection}
+                user={user} />
+            )}
         </div>
     )
 }

@@ -1,0 +1,20 @@
+.options-bar {
+    background-color: red;
+    width: 100vw;
+    height: 40px;
+    position: fixed;
+    bottom: 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.option-items {
+    color: white;
+    text-align: center;
+}
+
+.bulk-delete {
+    font-weight: 500;
+    cursor: pointer;
+}
