@@ -54,7 +54,7 @@ export default function EditCard({noteToEdit, setNoteToEdit, user}) {
 
     return (
         <div className="new-note">
-            {doneEdit && (<Navigate to="/notes" />)}
+            {doneEdit && (<Navigate to="/home" />)}
             <div className="note-box-edit">
                 <p className="note-p">Edit Note</p>
                 <input id="newTitle" type="text" placeholder="Title" name="title" />

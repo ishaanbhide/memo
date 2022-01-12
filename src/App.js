@@ -5,6 +5,7 @@ import Home from "./Components/Home/Home";
 import Authentication from "./Components/AuthenticationPage/Authentication";
 import Notes from "./Components/Notes/Notes";
 import Edit from "./Components/Edit/Edit";
+import Header from "./Components/Header/Header";
 
 // Firebase imports
 import { onAuthStateChanged } from "firebase/auth";
@@ -19,6 +20,7 @@ export default function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [notes, setNotes] = useState([]);
   const [noteToEdit, setNoteToEdit] = useState([]);
+  const [reloadNotes, setReloadNotes] = useState(false);
 
 
   // Detecting logged in user
@@ -39,23 +41,23 @@ export default function App() {
 
   return (
     <div className="app">
+      
       <Router>
+
+        <Header loggedIn={loggedIn} setLoggedIn={setLoggedIn} user={user} />
+
         <Routes>
 
           <Route path="/home"
           exact
           element={<Home loggedIn={loggedIn} 
           setLoggedIn={setLoggedIn} 
-          user={user} />} 
-          />
-
-          <Route path="/notes/"
-          exact
-          element={<Notes loggedIn={loggedIn} 
-          setLoggedIn={setLoggedIn} user={user} 
+          user={user}
           notes={notes}
           setNotes={setNotes}
-          setNoteToEdit={setNoteToEdit} />}
+          setNoteToEdit={setNoteToEdit}
+          setReloadNotes={setReloadNotes}
+          reloadNotes={reloadNotes} />} 
           />
 
           <Route path="/edit/:id"

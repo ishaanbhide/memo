@@ -1,0 +1,18 @@
+.home {
+}
+
+.home-sections {
+    display: grid;
+    grid-template-columns: 30% 70%;
+    height: calc(100vh - 90px);
+}
+
+.home-left-section {
+    justify-content: center;
+    background-color: #d8dde0;
+}
+
+.home-right-section {
+    justify-content: center;
+    background-color: #FFE3E3;
+}

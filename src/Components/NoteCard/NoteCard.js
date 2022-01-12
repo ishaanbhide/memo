@@ -31,6 +31,7 @@ export default function NoteCard({noteID, noteTitle, noteCategory, noteMessage, 
             setSelectedNotes(tempSelectedNotes);
         }
 
+        console.log(selectedNotes);
         if (selectedNotes.length > 0) {
             setOptionsBar(true);
         } else {

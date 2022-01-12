@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
 import "./Notes.css";
-import Header from "../Header/Header";
-import Menu from "../Menu/Menu";
 import NoteCard from "../NoteCard/NoteCard";
 import Loader from "../Loader/Loader";
 import OptionsBar from "../OptionsBar/OptionsBar";
@@ -9,7 +7,7 @@ import { getDocs } from "@firebase/firestore";
 import { collection, query, orderBy } from "firebase/firestore";
 import { db } from "../../firebase";
 
-export default function Notes({loggedIn, setLoggedIn, user, notes, setNotes, setNoteToEdit}) {
+export default function Notes({loggedIn, setLoggedIn, user, notes, setNotes, setNoteToEdit, reloadNotes, setReloadNotes}) {
 
     // States
 
@@ -18,7 +16,7 @@ export default function Notes({loggedIn, setLoggedIn, user, notes, setNotes, set
     const [filteredNotes, setFilteredNotes] = useState();
     const [selectedNotes, setSelectedNotes] = useState([]);
     const [optionsBar, setOptionsBar] = useState(false);
-    const [reloadNotes, setReloadNotes] = useState(false);
+    
 
 
     const getNotes = async (user) => {
@@ -85,9 +83,6 @@ export default function Notes({loggedIn, setLoggedIn, user, notes, setNotes, set
     
     return (
         <div className="notes">
-            <Header loggedIn={loggedIn} setLoggedIn={setLoggedIn} user={user} />
-            <Menu />
-
             
             {loadingNotes ? (
                 <>
@@ -118,7 +113,8 @@ export default function Notes({loggedIn, setLoggedIn, user, notes, setNotes, set
             {optionsBar && (
                 <OptionsBar selectedNotes={selectedNotes} 
                 setReloadNotes={setReloadNotes}
-                user={user} />
+                user={user}
+                setOptionsBar={setOptionsBar} />
             )}
         </div>
     )

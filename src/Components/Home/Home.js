@@ -1,15 +1,13 @@
 import React, { useEffect, useState } from "react";
 import "./Home.css";
 import { Navigate } from "react-router-dom";
-import Header from "../../Components/Header/Header";
 import New from "../../Components/New/New";
-import Menu from "../../Components/Menu/Menu";
 import { getDocs } from "@firebase/firestore";
 import { collection, query, orderBy } from "firebase/firestore";
 import { db } from "../../firebase";
-import Loader from "../Loader/Loader";
+import Notes from "../Notes/Notes";
 
-export default function Home({loggedIn, setLoggedIn, user}) {
+export default function Home({loggedIn, setLoggedIn, user, notes, setNotes, setNoteToEdit, reloadNotes, setReloadNotes}) {
 
     const [loadingHome, setLoadingHome] = useState(false);
     const [dropCategories, setDropCategories] = useState([""]);
@@ -25,8 +23,6 @@ export default function Home({loggedIn, setLoggedIn, user}) {
             console.log(error.message);
         }
     }
-
-
 
     useEffect(async() => {
 
@@ -44,14 +40,27 @@ export default function Home({loggedIn, setLoggedIn, user}) {
   
     }, [loggedIn]);
     
-    return (
+    return (  
         <div className="home">
             {!loggedIn && (<Navigate to="/" />)}
-                <Header loggedIn={loggedIn} setLoggedIn={setLoggedIn} user={user} />
-                <Menu />
-                {loadingHome ? (
-                <New user={user} dropCategories={dropCategories} setDropCategories={setDropCategories} />
-            ) : <Loader />}
+            
+
+            <div className="home-sections">
+                <div className="home-left-section">
+                    <New user={user} dropCategories={dropCategories} setDropCategories={setDropCategories} setReloadNotes={setReloadNotes}/>
+                </div>
+
+                <div className="home-right-section">
+                    <Notes 
+                    loggedIn={loggedIn} 
+                    setLoggedIn={setLoggedIn} user={user} 
+                    notes={notes}
+                    setNotes={setNotes}
+                    setNoteToEdit={setNoteToEdit}
+                    reloadNotes={reloadNotes}
+                    setReloadNotes={setReloadNotes} />
+                </div>
+            </div>
         </div>
     )
 }

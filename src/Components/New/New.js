@@ -3,7 +3,7 @@ import "./New.css";
 import { db } from "../../firebase";
 import { collection, addDoc } from "firebase/firestore";
 
-export default function New({user, dropCategories, setDropCategories}) {
+export default function New({user, dropCategories, setDropCategories, setReloadNotes}) {
 
     const createNote = async () => {
         try {
@@ -24,6 +24,8 @@ export default function New({user, dropCategories, setDropCategories}) {
                 message: noteMessage,
                 date: new Date()
              });
+
+             setReloadNotes(true);
 
         } catch (error) {
             console.log(error.message);
