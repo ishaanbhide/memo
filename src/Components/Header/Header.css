@@ -17,6 +17,10 @@ h1 {
     color: #2a4d69;
 }
 
+a {
+    text-decoration: none;
+}
+
 h1:hover {
     cursor: pointer;
 }
@@ -44,4 +48,11 @@ h1:hover {
 .logout-button:hover {
     background-color: #63ace5;
     transition: 0.2s ease;
+}
+
+@media screen and (max-width: 500px) {
+
+    .header-right > p {
+        display: none;
+    }
 }

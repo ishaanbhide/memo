@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./Home.css";
 import { Navigate } from "react-router-dom";
 import New from "../../Components/New/New";
+import Header from "../../Components/Header/Header";
 import { getDocs } from "@firebase/firestore";
 import { collection, query, orderBy } from "firebase/firestore";
 import { db } from "../../firebase";
@@ -44,6 +45,7 @@ export default function Home({loggedIn, setLoggedIn, user, notes, setNotes, setN
         <div className="home">
             {!loggedIn && (<Navigate to="/" />)}
             
+            <Header loggedIn={loggedIn} setLoggedIn={setLoggedIn} user={user} />
 
             <div className="home-sections">
                 <div className="home-left-section">
@@ -58,7 +60,8 @@ export default function Home({loggedIn, setLoggedIn, user, notes, setNotes, setN
                     setNotes={setNotes}
                     setNoteToEdit={setNoteToEdit}
                     reloadNotes={reloadNotes}
-                    setReloadNotes={setReloadNotes} />
+                    setReloadNotes={setReloadNotes}
+                    setDropCategories={setDropCategories} />
                 </div>
             </div>
         </div>

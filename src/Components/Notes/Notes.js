@@ -7,7 +7,7 @@ import { getDocs } from "@firebase/firestore";
 import { collection, query, orderBy } from "firebase/firestore";
 import { db } from "../../firebase";
 
-export default function Notes({loggedIn, setLoggedIn, user, notes, setNotes, setNoteToEdit, reloadNotes, setReloadNotes}) {
+export default function Notes({loggedIn, user, notes, setNotes, setNoteToEdit, reloadNotes, setReloadNotes, setDropCategories}) {
 
     // States
 
@@ -16,14 +16,12 @@ export default function Notes({loggedIn, setLoggedIn, user, notes, setNotes, set
     const [filteredNotes, setFilteredNotes] = useState();
     const [selectedNotes, setSelectedNotes] = useState([]);
     const [optionsBar, setOptionsBar] = useState(false);
-    
-
 
     const getNotes = async (user) => {
         try {
             const q = query(collection(db, user.uid), orderBy("date", "desc"));
             const data = await getDocs(q);
-            const newNotes = data.docs.map((doc) => ({...doc.data(), id: doc.id}))
+            const newNotes = data.docs.map((doc) => ({...doc.data(), id: doc.id}));
             setNotes(newNotes);
             setFilteredNotes(newNotes);
             setLoadingNotes(true);
@@ -41,30 +39,32 @@ export default function Notes({loggedIn, setLoggedIn, user, notes, setNotes, set
           const updatedNotes = await getNotes(user);
           console.log(updatedNotes);
 
-          let categoriesTemp = ["All"];
+          let categoriesTemp = [];
           (updatedNotes.map((note) => categoriesTemp.push(note.category)));
           let categoriesSet = [...new Set(categoriesTemp)];
           setAllCategories(categoriesSet);
+          setDropCategories(categoriesSet);
         }
   
       }, [loggedIn]);
 
 
-      useEffect(async() => {
-          if (reloadNotes === true) {
-              setLoadingNotes(false);
-              if (loggedIn === true) {
-                const updatedNotes = await getNotes(user);
-                console.log(updatedNotes);
-      
-                let categoriesTemp = ["All"];
-                (updatedNotes.map((note) => categoriesTemp.push(note.category)));
-                let categoriesSet = [...new Set(categoriesTemp)];
-                setAllCategories(categoriesSet);
-              }
-              setReloadNotes(false);
-          }
-      }, [reloadNotes]);
+    useEffect(async() => {
+        if (reloadNotes === true) {
+            setLoadingNotes(false);
+            if (loggedIn === true) {
+            const updatedNotes = await getNotes(user);
+            console.log(updatedNotes);
+    
+            let categoriesTemp = [];
+            (updatedNotes.map((note) => categoriesTemp.push(note.category)));
+            let categoriesSet = [...new Set(categoriesTemp)];
+            setAllCategories(categoriesSet);
+            setDropCategories(categoriesSet);
+            }
+            setReloadNotes(false);
+        }
+    }, [reloadNotes]);
 
 
       const filterNotes = (category) => {
@@ -82,18 +82,20 @@ export default function Notes({loggedIn, setLoggedIn, user, notes, setNotes, set
       }
     
     return (
+        <>
         <div className="notes">
             
             {loadingNotes ? (
                 <>
-                    <div className="categories">
+                    <div id="category-p" className="categories">
+                        <p onClick={() => filterNotes("All")}>All</p>
                         {allCategories.map(category => {
                             return (
-                                <p className="category-p" onClick={() => filterNotes(category)}>{category}</p>
+                                <p onClick={() => filterNotes(category)}>{category}</p>
                             )
                         })}
                     </div>
-
+                    
                     <div className="notes-grid">
                     {filteredNotes.map((note) => {
                         return (
@@ -109,13 +111,16 @@ export default function Notes({loggedIn, setLoggedIn, user, notes, setNotes, set
                     </div>
                 </>
             ) : <Loader />}
-
-            {optionsBar && (
-                <OptionsBar selectedNotes={selectedNotes} 
-                setReloadNotes={setReloadNotes}
-                user={user}
-                setOptionsBar={setOptionsBar} />
-            )}
         </div>
+
+        {optionsBar && (
+            <OptionsBar className="options-bar" 
+            selectedNotes={selectedNotes} 
+            setReloadNotes={setReloadNotes}
+            user={user}
+            setOptionsBar={setOptionsBar} />
+        )}
+
+        </>
     )
 }

@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
+import { Navigate } from "react-router";
 import { useParams } from "react-router";
 import "./Edit.css";
 import EditCard from "../EditCard/EditCard";
+import Header from "../Header/Header.js"
 import Loader from "../Loader/Loader";
 import { db } from "../../firebase";
 import { doc, getDoc } from "firebase/firestore";
@@ -42,8 +44,13 @@ export default function Edit({loggedIn, setLoggedIn, user, noteToEdit, setNoteTo
 
     return (
         <div className="edit">
+            {!loggedIn && (<Navigate to="/" />)}
+            <Header loggedIn={loggedIn} setLoggedIn={setLoggedIn} user={user} />
+
             {loadingEdit ? (
-                <EditCard noteToEdit={noteToEdit} setNoteToEdit={setNoteToEdit} user={user} />
+                <div className="edit-page">
+                    <EditCard noteToEdit={noteToEdit} setNoteToEdit={setNoteToEdit} user={user} />
+                </div>
             ) : <Loader />}
         </div>
     )

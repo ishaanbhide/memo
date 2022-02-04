@@ -3,9 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
 import Home from "./Components/Home/Home";
 import Authentication from "./Components/AuthenticationPage/Authentication";
-import Notes from "./Components/Notes/Notes";
 import Edit from "./Components/Edit/Edit";
-import Header from "./Components/Header/Header";
 
 // Firebase imports
 import { onAuthStateChanged } from "firebase/auth";
@@ -21,7 +19,6 @@ export default function App() {
   const [notes, setNotes] = useState([]);
   const [noteToEdit, setNoteToEdit] = useState([]);
   const [reloadNotes, setReloadNotes] = useState(false);
-
 
   // Detecting logged in user
 
@@ -43,9 +40,6 @@ export default function App() {
     <div className="app">
       
       <Router>
-
-        <Header loggedIn={loggedIn} setLoggedIn={setLoggedIn} user={user} />
-
         <Routes>
 
           <Route path="/home"

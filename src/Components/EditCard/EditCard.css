@@ -1,3 +1,8 @@
+.note-box-edit > p{
+    font-size: 20px;
+    font-weight: 600;
+}
+
 .note-button-edit {
     width: 300px;
     height: 30px;

@@ -1,24 +1,32 @@
+.notes {
+    margin: 20px 30px 20px 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
 .categories {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 30px;
+    gap: 0px 30px;
+    flex-wrap: wrap;
 }
 
-.category-p {
+.categories > p {
     color: #2a4d69;
     font-weight: 600;
 }
 
-.category-p:hover {
+.categories > p:hover {
     cursor: pointer;
     color: #63ace5;
 }
 
 .notes-grid {
-    padding-top: 30px;
-    justify-content: center;
     display: grid;
-    grid-template-columns: auto auto auto;
-    gap: 30px;
+    justify-content: center;
+    grid-template-columns: repeat(auto-fit, 300px);
+    grid-template-rows: repeat(autofit);
+    gap: 40px;
 }

@@ -23,9 +23,7 @@ export default function OptionsBar({selectedNotes, setReloadNotes, user, setOpti
 
     return (
         <div className="options-bar">
-            <div className="option-items">
-                <p className="bulk-delete" onClick={bulkDelete}>Delete</p>
-            </div>
+            <p className="bulk-delete" onClick={bulkDelete}>Delete</p>
         </div>
     )
 }

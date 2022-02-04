@@ -53,10 +53,10 @@ export default function EditCard({noteToEdit, setNoteToEdit, user}) {
 
 
     return (
-        <div className="new-note">
+        <div className="edit-card">
             {doneEdit && (<Navigate to="/home" />)}
             <div className="note-box-edit">
-                <p className="note-p">Edit Note</p>
+                <p>Edit Note</p>
                 <input id="newTitle" type="text" placeholder="Title" name="title" />
                 <input id="newCategory" type="text" placeholder="Category" name="category"/>
                 <textarea id="newMessage" name="message"></textarea>
