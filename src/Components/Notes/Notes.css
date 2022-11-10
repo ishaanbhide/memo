@@ -30,3 +30,8 @@
     grid-template-rows: repeat(autofit);
     gap: 40px;
 }
+
+.disabledDiv {
+    pointer-events: none;
+    opacity: 0.4;
+}

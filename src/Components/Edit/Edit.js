@@ -26,20 +26,25 @@ export default function Edit({loggedIn, setLoggedIn, user, noteToEdit, setNoteTo
         }
     }
 
-    useEffect(async() => {
-
-        if (loggedIn === true) {
-            if (noteToEdit.length === 0) {
-                const noteTemp1 = await getNoteToEdit(user);
-                const noteTemp2 = noteTemp1.data();
-                noteTemp2.id = params.id;
-                setNoteToEdit(noteTemp2);
-            } else {
-                setLoadingEdit(true);
+    useEffect(() => {
+        const fetchData = async () => {
+            if (loggedIn === true) {
+                if (noteToEdit.length === 0) {
+                    const noteTemp1 = await getNoteToEdit(user);
+    
+                    if (noteTemp1 === undefined) {
+                        const noteTemp2 = noteTemp1.data();
+                        noteTemp2.id = params.id;
+                        setNoteToEdit(noteTemp2);
+                    }
+                } else {
+                    setLoadingEdit(true);
+                }
             }
         }
-
-      }, [loggedIn]);
+        
+        fetchData();
+      });
 
 
     return (

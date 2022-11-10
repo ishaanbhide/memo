@@ -1,10 +1,16 @@
 .note-card {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
     background-color: rgb(212, 238, 216);
     height: auto;
     padding: 20px;
     border-radius: 20px;
     box-shadow: 10px 10px #adcbe3;
-    display: inline-block;
+}
+
+.note-card > p {
+    margin: 0;
 }
 
 .note-category {
@@ -12,6 +18,8 @@
     text-transform: uppercase;
     font-size: 12px;
     font-weight: 600;
+    word-break: break-all;
+    white-space: normal;
 }
 
 .note-title {
@@ -19,6 +27,13 @@
     text-transform: capitalize;
     font-size: 16px;
     font-weight: 700;
+    word-break: break-all;
+    white-space: normal;
+}
+
+.note-message {
+    word-break: break-all;
+    white-space: normal;
 }
 
 .note-card-button {
@@ -26,6 +41,7 @@
     background-color: rgb(171, 226, 178);
     border: none;
     padding: 7px;
+    margin-top: 15px;
 }
 
 .note-card-button:hover {

@@ -25,21 +25,22 @@ export default function Home({loggedIn, setLoggedIn, user, notes, setNotes, setN
         }
     }
 
-    useEffect(async() => {
-
-        if (loggedIn === true) {
-          const updatedNotes = await getNotes(user);
-          console.log(updatedNotes);
-
-          let categoriesTemp = [];
-          (updatedNotes.map((note) => categoriesTemp.push(note.category)));
-          let categoriesSet = [...new Set(categoriesTemp)];
-          setDropCategories(categoriesSet);
-          setLoadingHome(true);
-          console.log(categoriesSet);
+    useEffect(() => {
+        const fetchData = async() => {
+            if (loggedIn === true) {
+                const updatedNotes = await getNotes(user);
+                console.log(updatedNotes);
+                let categoriesTemp = [];
+                (updatedNotes.map((note) => categoriesTemp.push(note.category)));
+                let categoriesSet = [...new Set(categoriesTemp)];
+                setDropCategories(categoriesSet);
+                setLoadingHome(true);
+                console.log(categoriesSet);
+              }
         }
-  
-    }, [loggedIn]);
+        
+        fetchData();
+    }, [loggedIn, user]);
     
     return (  
         <div className="home">
@@ -49,7 +50,7 @@ export default function Home({loggedIn, setLoggedIn, user, notes, setNotes, setN
 
             <div className="home-sections">
                 <div className="home-left-section">
-                    <New user={user} dropCategories={dropCategories} setDropCategories={setDropCategories} setReloadNotes={setReloadNotes}/>
+                    <New user={user} dropCategories={dropCategories} setReloadNotes={setReloadNotes}/>
                 </div>
 
                 <div className="home-right-section">

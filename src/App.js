@@ -33,8 +33,6 @@ export default function App() {
       console.log("Logged in");
     }
   });
-  
-
 
   return (
     <div className="app">

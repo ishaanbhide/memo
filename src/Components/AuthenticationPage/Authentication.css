@@ -1,7 +1,8 @@
 .authentication {
     height: 100vh;
     width: 100vw;
-    background-image: url("https://cdn.hovia.com/app/uploads/Blue-Illustrated-Landscape-Mountains-Wallpaper-Mural.jpg");
+    background-image: url("http://www.hdwallpaperslife.com/wp-content/uploads/2017/11/cool_mountains_4k-HD.jpg");
+    background-size: cover;
 }
 
 .surround-box {
@@ -10,8 +11,8 @@
 
 .auth-box {
     border-style: solid;
-    border-width: 2px;
-    border-color: rgb(90, 90, 90);
+    border-width: 1px;
+    border-color: white;
     padding: 30px;
     width: 210px;
 }
@@ -26,12 +27,14 @@
     display: flex;
     gap: 6px;
     align-items: center;
+    color: white;
 }
 
 .register {
     display: flex;
     flex-direction: column;
     gap: 5px;
+    color: white;
 }
 
 .auth-button {
@@ -70,20 +73,22 @@
     font-size: 1em;
     transition: padding 0.3s 0.2s ease;
     border-width: 0 0 2px;
-    border-color: rgb(53, 53, 53);
+    border-color: white;
+    color: white;
 }
 
-::placeholder {
-    color: rgb(53, 53, 53);
+.auth-input::placeholder {
+    color: white;
     opacity: 50%;
   }
 
 .auth-input:focus {
-    border-color: green
+    border-color: rgb(6, 196, 6)
   }
 
 .auth-p {
-    color: #2a4d69;
+    color: white;
+    text-decoration: underline;
 }
 
 .auth-p:hover {

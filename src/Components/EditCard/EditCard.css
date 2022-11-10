@@ -11,12 +11,20 @@
     border: none;
 }
 
+.note-button-edit:hover {
+    background-color: rgb(34, 201, 34);
+}
+
 .note-button-delete {
     width: 300px;
     height: 30px;
     background-color: rgb(218, 16, 16);
     color: white;
     border: none;
+}
+
+.note-button-delete:hover {
+    background-color: rgb(237, 57, 57);
 }
 
 .note-box-edit {

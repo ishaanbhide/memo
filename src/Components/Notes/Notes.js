@@ -21,7 +21,14 @@ export default function Notes({loggedIn, user, notes, setNotes, setNoteToEdit, r
         try {
             const q = query(collection(db, user.uid), orderBy("date", "desc"));
             const data = await getDocs(q);
-            const newNotes = data.docs.map((doc) => ({...doc.data(), id: doc.id}));
+            const newNotes = data.docs.map((doc) => ({...doc.data(), id: doc.id, checked: false}));
+
+            newNotes.forEach((note) => {
+                if (selectedNotes.includes(note.id)) {
+                    note.checked = true;
+                }
+            })
+
             setNotes(newNotes);
             setFilteredNotes(newNotes);
             setLoadingNotes(true);
@@ -33,37 +40,39 @@ export default function Notes({loggedIn, user, notes, setNotes, setNoteToEdit, r
     }
 
 
-    useEffect(async() => {
-
-        if (loggedIn === true) {
-          const updatedNotes = await getNotes(user);
-          console.log(updatedNotes);
-
-          let categoriesTemp = [];
-          (updatedNotes.map((note) => categoriesTemp.push(note.category)));
-          let categoriesSet = [...new Set(categoriesTemp)];
-          setAllCategories(categoriesSet);
-          setDropCategories(categoriesSet);
-        }
-  
-      }, [loggedIn]);
-
-
-    useEffect(async() => {
-        if (reloadNotes === true) {
-            setLoadingNotes(false);
+    useEffect(() => {
+        const fetchData = async() => {
             if (loggedIn === true) {
-            const updatedNotes = await getNotes(user);
-            console.log(updatedNotes);
-    
-            let categoriesTemp = [];
-            (updatedNotes.map((note) => categoriesTemp.push(note.category)));
-            let categoriesSet = [...new Set(categoriesTemp)];
-            setAllCategories(categoriesSet);
-            setDropCategories(categoriesSet);
-            }
-            setReloadNotes(false);
+                const updatedNotes = await getNotes(user);
+                let categoriesTemp = [];
+                (updatedNotes.map((note) => categoriesTemp.push(note.category)));
+                let categoriesSet = [...new Set(categoriesTemp)];
+                setAllCategories(categoriesSet);
+                setDropCategories(categoriesSet);
+              }
         }
+        
+        fetchData();
+      }, [loggedIn, setDropCategories, user]);
+
+
+    useEffect(() => {
+        const fetchData = async() => {
+            if (reloadNotes === true) {
+                setLoadingNotes(false);
+                if (loggedIn === true) {
+                const updatedNotes = await getNotes(user);
+                let categoriesTemp = [];
+                (updatedNotes.map((note) => categoriesTemp.push(note.category)));
+                let categoriesSet = [...new Set(categoriesTemp)];
+                setAllCategories(categoriesSet);
+                setDropCategories(categoriesSet);
+                }
+                setReloadNotes(false);
+            }
+        }
+
+        fetchData();
     }, [reloadNotes]);
 
 
@@ -106,7 +115,8 @@ export default function Notes({loggedIn, user, notes, setNotes, setNoteToEdit, r
                             setNoteToEdit={setNoteToEdit}
                             selectedNotes={selectedNotes}
                             setSelectedNotes={setSelectedNotes}
-                            setOptionsBar={setOptionsBar} />
+                            setOptionsBar={setOptionsBar}
+                            checked={note.checked} />
                         )})}
                     </div>
                 </>

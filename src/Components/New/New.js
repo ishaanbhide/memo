@@ -3,14 +3,18 @@ import "./New.css";
 import { db } from "../../firebase";
 import { collection, addDoc } from "firebase/firestore";
 
-export default function New({user, dropCategories, setDropCategories, setReloadNotes}) {
+export default function New({user, dropCategories, setReloadNotes}) {
 
     const createNote = async () => {
         try {
 
             const noteTitle = document.getElementById("newTitle").value;
-            const noteCategory = document.getElementById("newCategory").value;
+            let noteCategory = document.getElementById("newCategory").value;
             const noteMessage = document.getElementById("newMessage").value;
+
+            if (document.getElementById("newCategory").value === "") {
+                noteCategory = "Miscellaneous"
+            }
 
             document.getElementById("newTitle").value = "";
             document.getElementById("newCategory").value = "";

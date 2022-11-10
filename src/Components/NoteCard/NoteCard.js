@@ -1,9 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useEffect } from "react/cjs/react.development";
 import "./NoteCard.css";
 
-export default function NoteCard({noteID, noteTitle, noteCategory, noteMessage, setNoteToEdit, selectedNotes, setSelectedNotes, setOptionsBar}) {
+export default function NoteCard({noteID, noteTitle, noteCategory, noteMessage, setNoteToEdit, selectedNotes, setSelectedNotes, setOptionsBar, checked}) {
 
     const editNote = () => {
 
@@ -31,11 +30,12 @@ export default function NoteCard({noteID, noteTitle, noteCategory, noteMessage, 
             setSelectedNotes(tempSelectedNotes);
         }
 
-        console.log(selectedNotes);
         if (selectedNotes.length > 0) {
             setOptionsBar(true);
+            document.getElementById("category-p").classList.add("disabledDiv");
         } else {
             setOptionsBar(false);
+            document.getElementById("category-p").classList.remove("disabledDiv");
         }
     }
 
